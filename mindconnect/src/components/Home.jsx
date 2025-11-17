@@ -1,6 +1,15 @@
 import React from "react";
 import "./Home.css";
 
+import MoodTracker from "./MoodTracker";
+import Chatbot from "./Chatbot";
+import RelationshipCheckIn from "./RelationshipCheckIn";
+import Insights from "./Insights";
+import SafetyNet from "./SafetyNet";
+import Resources from "./Resources";
+import About from "./About";
+// Import other components as needed
+
 function Home() {
   return (
     <div className="main-content">
@@ -24,6 +33,46 @@ function Home() {
           <li>🧑‍⚕️ Resources for Professional Help</li>
           <li>🔒 Privacy & Consent Built In</li>
         </ul>
+      </section>
+
+      <section className="home-component-previews">
+        <h2>Quick Overview</h2>
+        
+        <div>
+          <h3>Mood Tracker</h3>
+          <MoodTracker summaryOnly={true} />
+        </div>
+
+        <div>
+          <h3>Relationship Check-in</h3>
+          <RelationshipCheckIn summaryOnly={true} />
+        </div>
+
+        <div>
+          <h3>AI Chatbot</h3>
+          <Chatbot summaryOnly={true} />
+        </div>
+
+        <div>
+            <h3>Safetyney</h3>
+            <SafetyNet summaryOnly={true} />
+        </div>
+
+        <div>
+          <h3>insights</h3>
+          <Insights summaryOnly={true} />
+        </div>
+
+        <div>
+          <h3>resources</h3>
+          <Resources summaryOnly={true} />
+        </div>
+        
+        <div>
+          <h3>about</h3>
+          <About summaryOnly={true} />
+        </div>
+        {/* Add more components and summaries as you like */}
       </section>
     </div>
   );

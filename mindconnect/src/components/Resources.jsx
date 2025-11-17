@@ -1,7 +1,7 @@
 import React from "react";
 import "./Resources.css";
 
-function Resources() {
+function Resources({ summaryOnly }) {
   const resources = [
     {
       category: "Mental Health Help Lines",
@@ -29,6 +29,23 @@ function Resources() {
     }
   ];
 
+  if (summaryOnly) {
+    // Show just categories and number of links as summary
+    return (
+      <div className="resources-summary">
+        <h4>Helpful Resources & Guidance</h4>
+        <ul>
+          {resources.map((section, idx) => (
+            <li key={idx}>
+              <strong>{section.category}</strong> ({section.links.length} links)
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  // Full detailed resource list UI
   return (
     <div className="main-content">
       <h2>Helpful Resources & Guidance</h2>

@@ -1,7 +1,19 @@
 import React from "react";
 import "./About.css";
 
-function About() {
+function About({ summaryOnly }) {
+  if (summaryOnly) {
+    return (
+      <div className="about-summary">
+        <h3>About MindConnect</h3>
+        <p>MindConnect supports mental wellness through mood tracking, self-reflection, and social safety tools. Empowering you to understand your emotional health better and connect with resources.</p>
+        <p>
+          Contact us at <a href="mailto:support@mindconnect.com">support@mindconnect.com</a> for feedback, collaborations, or volunteering.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="main-content">
       <h2>About MindConnect</h2>

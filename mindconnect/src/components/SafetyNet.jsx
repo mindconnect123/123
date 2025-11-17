@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./SafetyNet.css";
 
-function SafetyNet() {
+function SafetyNet({ summaryOnly }) {
   const [contacts, setContacts] = useState(() => {
     const saved = localStorage.getItem("trustedContacts");
     return saved ? JSON.parse(saved) : [];
@@ -30,6 +30,28 @@ function SafetyNet() {
     setContacts(contacts.filter(contact => contact.id !== id));
   };
 
+  if (summaryOnly) {
+    // Render concise list or count of trusted contacts
+    return (
+      <div className="safetynet-summary">
+        <h4>Trusted Contacts</h4>
+        {contacts.length === 0 ? (
+          <p>No trusted contacts registered yet.</p>
+        ) : (
+          <ul>
+            {contacts.slice(0, 3).map(({ id, name, email, phone }) => (
+              <li key={id}>
+                <strong>{name}</strong> {email && `- ${email}`} {phone && `- ${phone}`}
+              </li>
+            ))}
+            {contacts.length > 3 && <li>...and {contacts.length - 3} more</li>}
+          </ul>
+        )}
+      </div>
+    );
+  }
+
+  // Full UI for adding and managing contacts
   return (
     <div className="main-content">
       <h2>Social Safety Net</h2>

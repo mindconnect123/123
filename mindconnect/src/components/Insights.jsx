@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Insights.css";
 
-function Insights() {
-  // Load data from localStorage or default empty arrays
+function Insights({ summaryOnly }) {
   const [moodHistory, setMoodHistory] = useState(() => {
     const saved = localStorage.getItem("moodHistory");
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [relationshipCheckins, setRelationshipCheckins] = useState(() => {
+  const [relationshipCheckins] = useState(() => {
     const saved = localStorage.getItem("relationshipCheckins");
     return saved ? JSON.parse(saved) : [];
   });
@@ -23,11 +22,9 @@ function Insights() {
     return saved ? JSON.parse(saved) : [];
   });
 
-  // States for new step and sleep inputs
   const [steps, setSteps] = useState("");
   const [sleepHours, setSleepHours] = useState("");
 
-  // Save step and sleep histories when updated
   useEffect(() => {
     localStorage.setItem("stepHistory", JSON.stringify(stepHistory));
   }, [stepHistory]);
@@ -36,7 +33,6 @@ function Insights() {
     localStorage.setItem("sleepHistory", JSON.stringify(sleepHistory));
   }, [sleepHistory]);
 
-  // Utility functions to compute averages
   const averageSteps = () => {
     if (stepHistory.length === 0) return 0;
     const total = stepHistory.reduce((sum, entry) => sum + entry.steps, 0);
@@ -51,17 +47,14 @@ function Insights() {
 
   const moodSummary = () => {
     if (moodHistory.length === 0) return "No mood data yet";
-    // Count occurrences of moods
     const counts = {};
     moodHistory.forEach(({ mood }) => {
       counts[mood] = (counts[mood] || 0) + 1;
     });
-    // Find most frequent mood
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
     return `Most frequent mood: ${sorted[0][0]} (${sorted[0][1]} times)`;
   };
 
-  // Add new steps entry
   const addSteps = (e) => {
     e.preventDefault();
     if (!steps || isNaN(steps) || +steps < 0) return;
@@ -73,7 +66,6 @@ function Insights() {
     setSteps("");
   };
 
-  // Add new sleep entry
   const addSleep = (e) => {
     e.preventDefault();
     if (!sleepHours || isNaN(sleepHours) || +sleepHours < 0) return;
@@ -84,6 +76,21 @@ function Insights() {
     setSleepHistory([newEntry, ...sleepHistory]);
     setSleepHours("");
   };
+
+  if (summaryOnly) {
+    return (
+      <div className="insights-summary">
+        <h4>Mood Summary</h4>
+        <p>{moodSummary()}</p>
+        <h4>Relationship Check-ins</h4>
+        <p>{relationshipCheckins.length} recorded</p>
+        <h4>Average Steps</h4>
+        <p>{averageSteps()} per day</p>
+        <h4>Average Sleep</h4>
+        <p>{averageSleep()} hours</p>
+      </div>
+    );
+  }
 
   return (
     <div className="main-content">

@@ -1,11 +1,12 @@
 .main-content {
-  margin-top: 90px; /* Makes space for the fixed navbar */
+  margin-top: 90px; /* space for fixed navbar */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 18px;
-  background: #e7f8f2;
+  padding: 40px 20px;
+  background-color: #e7f8f2;
   min-height: 100vh;
+  font-family: 'Arial', sans-serif;
 }
 
 .home-hero {
@@ -17,32 +18,47 @@
   color: #23473e;
   font-size: 2.8em;
   margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .home-hero p {
   color: #375251;
   font-size: 1.3em;
   margin-bottom: 24px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .home-btn {
   display: inline-block;
   padding: 14px 42px;
-  background: #20b57e;
+  background-color: #20b57e;
   color: #fff;
   border-radius: 8px;
   font-size: 1.2em;
   text-decoration: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
-.home-btn:hover {
-  background: #159364;
+.home-btn:hover,
+.home-btn:focus {
+  background-color: #159364;
+  outline: none;
+}
+
+.home-features {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 48px auto;
 }
 
 .home-features h2 {
   font-size: 2em;
   color: #23473e;
   margin-bottom: 22px;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -50,11 +66,52 @@
   list-style: none;
   padding: 0;
   text-align: left;
+  max-width: 360px;
+  margin: 0 auto;
 }
 
 .home-features li {
   font-size: 1.1em;
   margin: 14px 0;
   color: #244d44;
-  padding-left: 22px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.home-features li::before {
+  content: "•";
+  color: #20b57e;
+  position: absolute;
+  left: 0;
+  font-size: 1.4em;
+  line-height: 1;
+  top: 0;
+}
+
+.home-component-previews {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.home-component-previews h2 {
+  font-size: 2em;
+  color: #23473e;
+  margin-bottom: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.home-component-previews > div {
+  background: #fff;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+}
+
+.home-component-previews h3 {
+  margin: 0 0 12px 0;
+  font-weight: 600;
+  color: #1f4c39;
 }
